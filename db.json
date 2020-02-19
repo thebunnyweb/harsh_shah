@@ -1,0 +1,176 @@
+{
+  "species": [
+    "Aleena",
+    "Besalisk",
+    "Cerean",
+    "Chagrian",
+    "Clawdite",
+    "Droid",
+    "Dug",
+    "Ewok",
+    "Geonosian",
+    "Gungan",
+    "Human",
+    "Hutt",
+    "Iktotchi",
+    "Kaleesh",
+    "Kaminoan",
+    "Kel Dor",
+    "Mirialan",
+    "Mon Calamari",
+    "Muun",
+    "Nautolan",
+    "Neimodian",
+    "Pau'an",
+    "Quermian",
+    "Rodian",
+    "Skakoan",
+    "Sullustan",
+    "Tholothian",
+    "Togruta",
+    "Toong",
+    "Toydarian",
+    "Trandoshan",
+    "Twi'lek",
+    "Vulptereen",
+    "Wookiee",
+    "Xexto",
+    "Yoda's species",
+    "Zabrak"
+  ],
+  "characters": [
+    {
+      "id": 1,
+      "name": "Luke Skywalker",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Tatooine"
+    },
+    {
+      "id": 2,
+      "name": "C-3PO",
+      "species": "Droid",
+      "gender": "n/a",
+      "homeworld": "Tatooine"
+    },
+    {
+      "id": 3,
+      "name": "R2-D2",
+      "species": "Droid",
+      "gender": "n/a",
+      "homeworld": "Naboo"
+    },
+    {
+      "id": 4,
+      "name": "Darth Vader",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Tatooine"
+    },
+    {
+      "id": 5,
+      "name": "Leia Organa",
+      "species": "Human",
+      "gender": "female",
+      "homeworld": "Alderaan"
+    },
+    {
+      "id": 6,
+      "name": "Obi-Wan Kenobi",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Stewjon"
+    },
+    {
+      "id": 7,
+      "name": "Anakin Skywalker",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Tatooine"
+    },
+    {
+      "id": 8,
+      "name": "Chewbacca",
+      "species": "Wookiee",
+      "gender": "male",
+      "homeworld": "Kashyyyk"
+    },
+    {
+      "id": 9,
+      "name": "Han Solo",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Corellia"
+    },
+    {
+      "id": 10,
+      "name": "Yoda",
+      "species": "Yoda's species",
+      "gender": "male",
+      "homeworld": ""
+    },
+    {
+      "id": 11,
+      "name": "Sheev Palpatine",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Naboo"
+    },
+    {
+      "id": 12,
+      "name": "Boba Fett",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Kamino"
+    },
+    {
+      "id": 13,
+      "name": "Lando Calrissian",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": "Socorro"
+    },
+    {
+      "id": 14,
+      "name": "Qui-Gon Jinn",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": ""
+    },
+    {
+      "id": 15,
+      "name": "Finn",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": ""
+    },
+    {
+      "id": 16,
+      "name": "Rey",
+      "species": "Human",
+      "gender": "female",
+      "homeworld": ""
+    },
+    {
+      "id": 17,
+      "name": "Poe Dameron",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": ""
+    },
+    {
+      "id": 18,
+      "name": "Kylo Ren",
+      "species": "Human",
+      "gender": "male",
+      "homeworld": ""
+    },
+    {
+      "id": 19,
+      "name": "BB8",
+      "species": "Droid",
+      "gender": "n/a",
+      "homeworld": ""
+    }
+  ]
+}
