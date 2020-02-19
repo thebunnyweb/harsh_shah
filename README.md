@@ -1,4 +1,4 @@
-# Sonalake front-end developer recruitment task
+<!-- # Sonalake front-end developer recruitment task
 
 The provided app is built using [create-react-app](https://github.com/facebook/create-react-app). See its documentation for more details. Your job is to implement a set of tasks listed in the Tasks section. Feel free to use all included libraries.
 
@@ -63,4 +63,4 @@ As a user I want to be able to add new characters by using a new form.
 ## Bonus Tasks (implement only if you want to)
 * Add working Delete button for each item.
 * Add working Edit button for each item.
-* Add sorting by clicking on the data grid row headers.
+* Add sorting by clicking on the data grid row headers. -->
