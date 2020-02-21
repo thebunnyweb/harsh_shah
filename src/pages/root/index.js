@@ -121,6 +121,16 @@ class Root extends React.Component {
     });
   };
 
+  sort = sortkey => {
+    let sortedData = this.state.characterData.sort((a, b) =>
+      a[sortkey] > b[sortkey] ? 1 : -1
+    );
+    this.setState({
+      ...this.state,
+      characterData: sortedData
+    });
+  };
+
   componentDidMount() {
     this.mapApiData(1);
   }
@@ -150,6 +160,7 @@ class Root extends React.Component {
         {!errors && characterData && characterData.length > 0 ? (
           <Suspense fallback={<div>Loading Characters</div>}>
             <TableRendererLazy
+              sortTable={this.sort}
               data={characterData}
               currentPage={currentPage}
               totalPages={totalPages}

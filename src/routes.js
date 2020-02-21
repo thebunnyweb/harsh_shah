@@ -8,7 +8,16 @@ const Routes = () => (
     <Route
       path="/addcharacter"
       exact
-      render={() => <AddCharacter title="Add new character" event="add" />}
+      render={props => (
+        <AddCharacter title="Add new character" pageevent="add" {...props} />
+      )}
+    />
+    <Route
+      path="/updatecharacter/:id"
+      exact
+      render={props => (
+        <AddCharacter title="Update character" pageevent="patch" {...props} />
+      )}
     />
     <Route path="**" render={() => <Redirect to="/" />} />
   </Switch>

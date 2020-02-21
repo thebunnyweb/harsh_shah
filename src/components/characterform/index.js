@@ -1,14 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
 
-// const updateRef = (state) => {
-//   let ref = Object.keys(state)[0];
-//   if(ref){
-//     referenceMap[ref].current.focus();
-//   }
-// }
-
-const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
+const CharacterFormComponent = ({ state, submitForm, handleChange, event }) => {
   const nameInputRef = useRef();
   const speciesInputRef = useRef();
   const genderInputRef = useRef();
@@ -29,7 +22,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
 
   return (
     <form onSubmit={e => submitForm(e)}>
-      <div className="form-group">
+      <div className="form-group required">
         <label htmlFor="name">Name</label>
         <input
           type="name"
@@ -38,6 +31,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           })}
           ref={nameInputRef}
           name="name"
+          value={state.formData.name ? state.formData.name : ''}
           onChange={e => handleChange(e)}
         />
         <div className="invalid-feedback">
@@ -46,7 +40,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           )}
         </div>
       </div>
-      <div className="form-group">
+      <div className="form-group required">
         <label htmlFor="species">Species</label>
         <select
           name="species"
@@ -54,14 +48,19 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           className={classNames('form-control', {
             'is-invalid': state.formErrors.species
           })}
+          value={state.formData.species}
           onChange={e => handleChange(e)}
         >
-          <option value="" default>
+          <option value="" default={state.formData.species ? null : 'default'}>
             Select One Species
           </option>
           {state.speciesData &&
             state.speciesData.map((item, i) => (
-              <option value={item} key={i}>
+              <option
+                value={item}
+                key={i}
+                default={state.formData.species === item ? 'default' : null}
+              >
                 {item}
               </option>
             ))}
@@ -72,7 +71,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           )}
         </div>
       </div>
-      <div className="form-group">
+      <div className="form-group required">
         <label htmlFor="gender">Gender</label>
         <div className="form-check">
           <label className="form-check-label">
@@ -82,6 +81,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
               className="form-check-input"
               name="gender"
               value="male"
+              checked={state.formData.gender === 'male'}
               onChange={e => handleChange(e)}
             />
             Male
@@ -94,6 +94,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
               className="form-check-input"
               name="gender"
               value="female"
+              checked={state.formData.gender === 'female'}
               onChange={e => handleChange(e)}
             />
             Female
@@ -106,6 +107,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
               className="form-check-input"
               name="gender"
               value="n/a"
+              checked={state.formData.gender === 'n/a'}
               onChange={e => handleChange(e)}
             />
             n/a
@@ -117,7 +119,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           </div>
         )}
       </div>
-      <div className="form-group">
+      <div className="form-group required">
         <label htmlFor="homeworld">Homeworld</label>
         <input
           type="homeworld"
@@ -125,6 +127,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
           className={classNames('form-control', {
             'is-invalid': state.formErrors.homeworld
           })}
+          value={state.formData.homeworld ? state.formData.homeworld : ''}
           name="homeworld"
           onChange={e => handleChange(e)}
         />
@@ -139,7 +142,7 @@ const CharacterFormComponent = ({ state, submitForm, handleChange }) => {
         disable={!state.postdataProcess ? '' : 'disabled'}
         className={classNames('btn btn-primary')}
       >
-        Submit
+        {event === 'add' ? 'Submit' : event === 'patch' ? 'Update' : 'Submit'}
       </button>
     </form>
   );

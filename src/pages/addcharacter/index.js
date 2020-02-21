@@ -1,5 +1,10 @@
 import React, { Fragment, Suspense } from 'react';
-import { getSpeices, addCharacter } from '../../api/api';
+import {
+  getSpeices,
+  addCharacter,
+  getCharacterById,
+  patchCharacter
+} from '../../api/api';
 import { Alert } from '../../components';
 import Validation from '../../utils/validation';
 import { sortkeys } from '../../utils/sortkeys';
@@ -39,7 +44,8 @@ class AddCharacterContainer extends React.Component {
       postdataError: null,
       postdataProcess: false,
       postSuccess: false,
-      triggerRefFocus: null
+      triggerRefFocus: null,
+      getCharacterByIdError: null
     };
   }
 
@@ -120,25 +126,47 @@ class AddCharacterContainer extends React.Component {
           isValidForm: true
         },
         () => {
-          addCharacter(this.state.formData)
-            .then(() => {
-              this.setState({
-                ...this.state,
-                triggerRefFocus: null,
-                postdataProcess: true,
-                postSuccess: true
+          if (this.props.pageevent === 'add') {
+            addCharacter(this.state.formData)
+              .then(() => {
+                this.setState({
+                  ...this.state,
+                  triggerRefFocus: null,
+                  postdataProcess: true,
+                  postSuccess: true
+                });
+                setTimeout(() => {
+                  this.props.history.push('/');
+                }, 300);
+              })
+              .catch(e => {
+                this.setState({
+                  ...this.state,
+                  triggerRefFocus: null,
+                  postdataError: e
+                });
               });
-              setTimeout(() => {
-                this.props.history.push('/');
-              }, 300);
-            })
-            .catch(e => {
-              this.setState({
-                ...this.state,
-                triggerRefFocus: null,
-                postdataError: e
+          } else if (this.props.pageevent === 'patch') {
+            patchCharacter(this.props.match.params.id, this.state.formData)
+              .then(() => {
+                this.setState({
+                  ...this.state,
+                  triggerRefFocus: null,
+                  postdataProcess: true,
+                  postSuccess: true
+                });
+                setTimeout(() => {
+                  this.props.history.push('/');
+                }, 300);
+              })
+              .catch(e => {
+                this.setState({
+                  ...this.state,
+                  triggerRefFocus: null,
+                  postdataError: e
+                });
               });
-            });
+          }
         }
       );
     }
@@ -176,10 +204,54 @@ class AddCharacterContainer extends React.Component {
           speciesDataError: e
         });
       });
+    if (this.props.pageevent === 'patch') {
+      let id = this.props.match.params.id;
+      if (id) {
+        getCharacterById(this.props.match.params.id)
+          .then(data => {
+            if (data === 404) {
+              this.setState({
+                ...this.state,
+                formData: {},
+                getCharacterByIdError: {
+                  message: 'Invalid Record is not found'
+                }
+              });
+            } else {
+              this.setState(
+                {
+                  ...this.state,
+                  formData: {
+                    name: data.name,
+                    species: data.species,
+                    gender: data.gender,
+                    homeworld: data.homeworld
+                  }
+                },
+                () => {
+                  console.log(this.state);
+                }
+              );
+            }
+          })
+          .catch(e => {
+            this.setState({
+              ...this.state,
+              formData: {},
+              getCharacterByIdError: e
+            });
+          });
+      }
+    }
   }
 
   render() {
-    const { speciesDataError, postdataError, postSuccess } = this.state;
+    const {
+      speciesDataError,
+      postdataError,
+      postSuccess,
+      getCharacterByIdError
+    } = this.state;
     return (
       <Fragment>
         {this.props.title && <h1>{this.props.title}</h1>}
@@ -192,12 +264,15 @@ class AddCharacterContainer extends React.Component {
         )}
         {speciesDataError ? (
           <Alert data={speciesDataError} flag="error" />
+        ) : getCharacterByIdError ? (
+          <Alert data={getCharacterByIdError} flag="error" />
         ) : (
           <Suspense fallback={<div>Loading Form...</div>}>
             <CharacterFormLazy
               state={this.state}
               submitForm={this.formSubmitValidation}
               handleChange={this.handleChangeState}
+              event={this.props.pageevent || ''}
             />
           </Suspense>
         )}

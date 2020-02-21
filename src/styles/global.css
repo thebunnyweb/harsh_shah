@@ -1,0 +1,8 @@
+.form-group.required > label:after {
+    content:"*";
+    color:#6464e2;
+    margin-left:5px;
+}
+.pointer{
+    cursor: pointer;
+}
