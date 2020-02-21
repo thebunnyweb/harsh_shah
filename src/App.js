@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Routes from './routes';
-import { Navbar } from './components'
+import { Navbar } from './components';
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         <Routes />
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default App;
