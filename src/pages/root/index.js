@@ -1,7 +1,7 @@
 import React, { Fragment, Suspense } from 'react';
-import { getCharacters, getCharactersSearch } from '../../api/api';
+import { getCharacters, getCharactersSearch, deleteCharacter } from '../../api/api';
 import Config from '../../appconfig';
-import { ListView, Alert } from '../../components';
+import { ListView, Alert, Modal } from '../../components';
 import { debounce } from 'lodash';
 
 const TableRendererLazy = React.lazy(() =>
@@ -27,7 +27,9 @@ class Root extends React.Component {
       errors: e,
       characterData: [],
       totalPages: 0,
-      currentPage: 0
+      currentPage: 0,
+      modalAction: false,
+      deleteId: null
     });
   };
 
@@ -83,6 +85,38 @@ class Root extends React.Component {
     }
   }, 1000);
 
+
+
+  deleteRecordFromServer = (id) => {
+    this.setState({
+      ...this.state,
+      modalAction: true,
+      deleteId: id
+    })
+  }
+
+  deleteActionTrigger = (val) => {
+    if(val){
+      deleteCharacter(this.state.deleteId).then(()=>{
+        this.setState({
+          ...this.state,
+          deleteRecordSuccess: "Record has been deleted"    
+        });
+        this.mapApiData(1);
+      }).catch((e)=>{
+        this.state({
+          ...this.state,
+          deleteRecordError: e    
+        });
+      })
+    }
+    this.setState({
+      ...this.state,
+      modalAction: false,
+      deleteId: null
+    })
+  }
+
   componentDidMount() {
     this.mapApiData(1);
   }
@@ -93,10 +127,14 @@ class Root extends React.Component {
       errors,
       totalPages,
       currentPage,
-      loading
+      loading,
+      modalAction,
+      deleteRecordError
     } = this.state;
     return (
       <Fragment>
+        {modalAction && (<Modal action={(val)=>this.deleteActionTrigger(val)} message={"Are you sure you want to delete this record ?"} />)}
+        {deleteRecordError && <Alert data={this.state.deleteRecordError} flag="error" />}
         <ListView searchApiRequest={param => this.searchApiRequest(param)} />
         {!errors && characterData && characterData.length > 0 ? (
           <Suspense fallback={<div>Loading Characters</div>}>
@@ -104,6 +142,7 @@ class Root extends React.Component {
               data={characterData}
               currentPage={currentPage}
               totalPages={totalPages}
+              deleteRecord={(data)=>this.deleteRecordFromServer(data)}
               handlePageChange={param => this.handlePageChanges(param)}
             />
           </Suspense>

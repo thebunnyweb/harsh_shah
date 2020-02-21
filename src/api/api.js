@@ -24,3 +24,10 @@ export function addCharacter(data) {
     body: JSON.stringify(data)
   });
 }
+
+
+export function deleteCharacter(id){
+  return fetch(`${Config.API_ENDPOINT_CHARACTERS}/${id}`, {
+    method: 'DELETE'
+  });
+}
