@@ -25,8 +25,7 @@ export function addCharacter(data) {
   });
 }
 
-
-export function deleteCharacter(id){
+export function deleteCharacter(id) {
   return fetch(`${Config.API_ENDPOINT_CHARACTERS}/${id}`, {
     method: 'DELETE'
   });

@@ -2,7 +2,13 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 
-const TableRenderer = ({ data, totalPages, currentPage, handlePageChange, deleteRecord }) => {
+const TableRenderer = ({
+  data,
+  totalPages,
+  currentPage,
+  handlePageChange,
+  deleteRecord
+}) => {
   return (
     <Fragment>
       <table className="table table-bordered table-hover">
@@ -34,7 +40,11 @@ const TableRenderer = ({ data, totalPages, currentPage, handlePageChange, delete
                     <button type="button" className="btn btn-secondary">
                       <i className="fa fa-pencil" aria-hidden="true" /> Edit
                     </button>
-                    <button type="button" className="btn btn-danger" onClick={()=>deleteRecord(item.id)}>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => deleteRecord(item.id)}
+                    >
                       <i className="fa fa-trash-o" aria-hidden="true" /> Remove
                     </button>
                   </div>
