@@ -1,5 +1,9 @@
 import React, { Fragment, Suspense } from 'react';
-import { getCharacters, getCharactersSearch, deleteCharacter } from '../../api/api';
+import {
+  getCharacters,
+  getCharactersSearch,
+  deleteCharacter
+} from '../../api/api';
 import Config from '../../appconfig';
 import { ListView, Alert, Modal } from '../../components';
 import { debounce } from 'lodash';
@@ -85,37 +89,47 @@ class Root extends React.Component {
     }
   }, 1000);
 
-
-
-  deleteRecordFromServer = (id) => {
+  deleteRecordFromServer = id => {
     this.setState({
       ...this.state,
       modalAction: true,
       deleteId: id
-    })
-  }
+    });
+  };
 
-  deleteActionTrigger = (val) => {
-    if(val){
-      deleteCharacter(this.state.deleteId).then(()=>{
-        this.setState({
-          ...this.state,
-          deleteRecordSuccess: "Record has been deleted"    
+  deleteActionTrigger = val => {
+    if (val) {
+      deleteCharacter(this.state.deleteId)
+        .then(() => {
+          this.setState({
+            ...this.state,
+            deleteRecordSuccess: 'Record has been deleted'
+          });
+          this.mapApiData(1);
+        })
+        .catch(e => {
+          this.state({
+            ...this.state,
+            deleteRecordError: e
+          });
         });
-        this.mapApiData(1);
-      }).catch((e)=>{
-        this.state({
-          ...this.state,
-          deleteRecordError: e    
-        });
-      })
     }
     this.setState({
       ...this.state,
       modalAction: false,
       deleteId: null
-    })
-  }
+    });
+  };
+
+  sort = sortkey => {
+    let sortedData = this.state.characterData.sort((a, b) =>
+      a[sortkey] > b[sortkey] ? 1 : -1
+    );
+    this.setState({
+      ...this.state,
+      characterData: sortedData
+    });
+  };
 
   componentDidMount() {
     this.mapApiData(1);
@@ -133,16 +147,24 @@ class Root extends React.Component {
     } = this.state;
     return (
       <Fragment>
-        {modalAction && (<Modal action={(val)=>this.deleteActionTrigger(val)} message={"Are you sure you want to delete this record ?"} />)}
-        {deleteRecordError && <Alert data={this.state.deleteRecordError} flag="error" />}
+        {modalAction && (
+          <Modal
+            action={val => this.deleteActionTrigger(val)}
+            message={'Are you sure you want to delete this record ?'}
+          />
+        )}
+        {deleteRecordError && (
+          <Alert data={this.state.deleteRecordError} flag="error" />
+        )}
         <ListView searchApiRequest={param => this.searchApiRequest(param)} />
         {!errors && characterData && characterData.length > 0 ? (
           <Suspense fallback={<div>Loading Characters</div>}>
             <TableRendererLazy
+              sortTable={this.sort}
               data={characterData}
               currentPage={currentPage}
               totalPages={totalPages}
-              deleteRecord={(data)=>this.deleteRecordFromServer(data)}
+              deleteRecord={data => this.deleteRecordFromServer(data)}
               handlePageChange={param => this.handlePageChanges(param)}
             />
           </Suspense>

@@ -1,19 +1,55 @@
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { debounce } from 'lodash';
 
-const TableRenderer = ({ data, totalPages, currentPage, handlePageChange, deleteRecord }) => {
+const TableRenderer = ({
+  data,
+  totalPages,
+  currentPage,
+  handlePageChange,
+  deleteRecord,
+  sortTable
+}) => {
   return (
     <Fragment>
       <table className="table table-bordered table-hover">
         <thead className="thead-light">
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Species</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Homeworld</th>
-            <th scope="col">Actions</th>
+            <th className="pointer" scope="col" onClick={() => sortTable('id')}>
+              Id <i className="fa fa-sort" aria-hidden="true" />
+            </th>
+            <th
+              className="pointer"
+              scope="col"
+              onClick={() => sortTable('name')}
+            >
+              Name <i className="fa fa-sort" aria-hidden="true" />
+            </th>
+            <th
+              className="pointer"
+              scope="col"
+              onClick={() => sortTable('species')}
+            >
+              Species <i className="fa fa-sort" aria-hidden="true" />
+            </th>
+            <th
+              className="pointer"
+              scope="col"
+              onClick={() => sortTable('gender')}
+            >
+              Gender <i className="fa fa-sort" aria-hidden="true" />
+            </th>
+            <th
+              className="pointer"
+              scope="col"
+              onClick={() => sortTable('homeworld')}
+            >
+              Homeworld <i className="fa fa-sort" aria-hidden="true" />
+            </th>
+            <th className="pointer" scope="col">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -31,10 +67,16 @@ const TableRenderer = ({ data, totalPages, currentPage, handlePageChange, delete
                     role="group"
                     aria-label="Actions"
                   >
-                    <button type="button" className="btn btn-secondary">
-                      <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                    </button>
-                    <button type="button" className="btn btn-danger" onClick={()=>deleteRecord(item.id)}>
+                    <Link to={`/updatecharacter/${item.id}`}>
+                      <button type="button" className="btn btn-secondary">
+                        <i className="fa fa-pencil" aria-hidden="true" /> Edit
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => deleteRecord(item.id)}
+                    >
                       <i className="fa fa-trash-o" aria-hidden="true" /> Remove
                     </button>
                   </div>
