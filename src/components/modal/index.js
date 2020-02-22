@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ModalComponent = ({ type, message, action }) => (
   <div id="modal">
@@ -20,5 +21,11 @@ const ModalComponent = ({ type, message, action }) => (
     </div>
   </div>
 );
+
+ModalComponent.propTypes = {
+  message: PropTypes.string,
+  action: PropTypes.func
+}
+
 
 export default ModalComponent;

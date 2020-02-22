@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ListView = ({ searchApiRequest }) => {
   return (
@@ -31,5 +32,9 @@ const ListView = ({ searchApiRequest }) => {
     </Fragment>
   );
 };
+
+ListView.propTypes = {
+  searchApiRequest: PropTypes.func
+}
 
 export default ListView;
