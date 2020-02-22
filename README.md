@@ -64,3 +64,7 @@ As a user I want to be able to add new characters by using a new form.
 * Add working Delete button for each item.
 * Add working Edit button for each item.
 * Add sorting by clicking on the data grid row headers. -->
+
+## Github CI 
+![](https://github.com/thebunnyweb/harsh_shah/workflows/Node.js%20CI/badge.svg)
+
