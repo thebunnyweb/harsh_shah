@@ -8,6 +8,7 @@ import Config from '../../appconfig';
 import { ListView, Alert, Modal } from '../../components';
 import { debounce } from 'lodash';
 
+
 const TableRendererLazy = React.lazy(() =>
   import('../../components/tablerender')
 );
@@ -178,4 +179,6 @@ class Root extends React.Component {
     );
   }
 }
+
+
 export default Root;

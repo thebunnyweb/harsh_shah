@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { debounce } from 'lodash';
+import PropTypes from 'prop-types'
 
 const TableRenderer = ({
   data,
@@ -145,5 +146,20 @@ const TableRenderer = ({
     </Fragment>
   );
 };
+
+TableRenderer.propTypes= {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+species: PropTypes.string,
+gender: PropTypes.string,
+homeworld: PropTypes.string
+  })),
+  totalPages : PropTypes.number,
+  currentPage : PropTypes.number,
+  handlePageChange: PropTypes.func,
+  deleteRecord : PropTypes.func,
+  sortTable: PropTypes.func
+}
 
 export default TableRenderer;

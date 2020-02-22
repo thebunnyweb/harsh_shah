@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const CharacterFormComponent = ({ state, submitForm, handleChange, event }) => {
   const nameInputRef = useRef();
@@ -147,5 +148,25 @@ const CharacterFormComponent = ({ state, submitForm, handleChange, event }) => {
     </form>
   );
 };
+
+CharacterFormComponent.propTypes = {
+  state: PropTypes.shape({
+    formErrors: PropTypes.object,
+      formData: PropTypes.object,
+      isValidForm: PropTypes.bool,
+      validationRules: PropTypes.array.isRequired,
+      fieldOrder:  PropTypes.array,
+      speciesData:  PropTypes.array,
+      speciesDataError: PropTypes.object,
+      postdataError: PropTypes.object,
+      postdataProcess: PropTypes.bool,
+      postSuccess: PropTypes.bool,
+      triggerRefFocus: PropTypes.string,
+      getCharacterByIdError: PropTypes.object
+  }),
+  submitForm: PropTypes.func,
+  handleChange: PropTypes.func,
+  event: PropTypes.string,
+}
 
 export default CharacterFormComponent;
