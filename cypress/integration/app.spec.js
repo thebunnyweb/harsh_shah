@@ -8,9 +8,11 @@ context('sonalake-task-react App', () => {
   });
 
   it('should display nav and list view link', () => {
-    cy.get('.container').then($container=>{
-      cy.get('.navbar').children().should('contain', 'List View').and('be.visible')
-    })
+    cy.get('.container').then($container => {
+      cy.get('.navbar')
+        .children()
+        .should('contain', 'List View')
+        .and('be.visible');
+    });
   });
-  
 });
