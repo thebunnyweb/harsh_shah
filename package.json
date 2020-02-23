@@ -16,6 +16,7 @@
     "build": "react-scripts build",
     "test:unit": "react-scripts test",
     "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
     "api": "json-server --watch db.json"
   },
   "eslintConfig": {

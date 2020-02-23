@@ -1,5 +1,5 @@
 import NavbarComponent from './navbar';
-import ListViewComponent from './list-view';
+import ListViewComponent from './listviewcontrols';
 import TableRendererComponent from './tablerender';
 import AlertComponent from './alertcomponent';
 import CharacterFormComponent from './characterform';
