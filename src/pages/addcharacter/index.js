@@ -227,11 +227,7 @@ class AddCharacterContainer extends React.Component {
                     gender: data.gender,
                     homeworld: data.homeworld
                   }
-                },
-                () => {
-                  console.log(this.state);
-                }
-              );
+                });
             }
           })
           .catch(e => {
