@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { debounce } from 'lodash';
@@ -13,7 +13,7 @@ const TableRenderer = ({
   sortTable
 }) => {
   return (
-    <Fragment>
+    <div className="table-responsive">
       <table className="table table-bordered table-hover">
         <thead className="thead-light">
           <tr>
@@ -143,7 +143,7 @@ const TableRenderer = ({
           )}
         </ul>
       </nav>
-    </Fragment>
+    </div>
   );
 };
 

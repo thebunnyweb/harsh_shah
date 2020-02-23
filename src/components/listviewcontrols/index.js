@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const ListView = ({ searchApiRequest }) => {
+const ListView = ({ searchApiRequest, searchInputRef }) => {
   return (
     <Fragment>
       <h1>List View</h1>
@@ -17,6 +17,7 @@ const ListView = ({ searchApiRequest }) => {
               className="form-control"
               id="searchInput"
               placeholder="Search..."
+              ref={searchInputRef}
               onChange={e => searchApiRequest(e.target.value)}
             />
           </div>

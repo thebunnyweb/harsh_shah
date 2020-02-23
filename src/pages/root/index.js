@@ -23,6 +23,7 @@ class Root extends React.Component {
       totalPages: 0,
       currentPage: 1
     };
+    this.setSearchRef = React.createRef()
   }
 
   setErrorState = e => {
@@ -88,7 +89,7 @@ class Root extends React.Component {
           this.setErrorState(e);
         });
     }
-  }, 1000);
+  }, 200);
 
   deleteRecordFromServer = id => {
     this.setState({
@@ -106,6 +107,7 @@ class Root extends React.Component {
             ...this.state,
             deleteRecordSuccess: 'Record has been deleted'
           });
+          this.setSearchRef.current.value = ""
           this.mapApiData(1);
         })
         .catch(e => {
@@ -157,7 +159,7 @@ class Root extends React.Component {
         {deleteRecordError && (
           <Alert data={this.state.deleteRecordError} flag="error" />
         )}
-        <ListView searchApiRequest={param => this.searchApiRequest(param)} />
+        <ListView searchApiRequest={param => this.searchApiRequest(param)}  searchInputRef={this.setSearchRef} />
         {!errors && characterData && characterData.length > 0 ? (
           <Suspense fallback={<div>Loading Characters</div>}>
             <TableRendererLazy
